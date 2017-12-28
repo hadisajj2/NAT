@@ -1,27 +1,41 @@
 Outside of the readme, there are two main files:
 
 1. NAT.h
-2. NAT.cpp
+2. NAT.cpp (main function is located here as well).
 
-I wrote the code in visual studio 2017 (hence stdafx.h is included in the header). If you run this 
-on visual studio, you need to turn of precomplied headers (you can find instructions here: https://msdn.microsoft.com/en-us/library/1hy7a92h.aspx). I've included
-all the required Visual studio files in the git repo.
+--------------------------------------------------------------------------------------
+PREREQUISITES FOR RUN INSTRUCTIONS:
 
-The main function is located under NAT.cpp. Once you run the program , you will be prompted to enter the NAT file and then the FLOW file.
+1. Visual Studio with support for C++ (can be downloaded here https://www.visualstudio.com/vs/cplusplus/). I tested it with Visual Studio 2017.
+
+--------------------------------------------------------------------------------------
+
+HOW TO RUN (ON VISUAL STUDIO 2017):
+
+1. Once you've downloaded the files, simply click on NAT.sln. 
+
+2. Turn off precomplied headers (you can find instructions here: https://msdn.microsoft.com/en-us/library/1hy7a92h.aspx You need to make sure
+that you select the correct configuration [release versus debug]). You can view the screenshot 'Project Properties' at the root directory on the master branch
+of the git repo. Note that if you are using a 32 bit machine, select win32.
+
+2. I've included all the required Visual studio files in the git repo. You can simply make the project by going to Build --> Build Solution
+
+3. The main function is located under NAT.cpp. Once you run the program , you will be prompted to enter the NAT file and then the FLOW file.
 I have set two sample files in the repo (the ones in the email, NAT.txt and FLOW.txt). The outputs will be written to output.txt 
-under ~/NAT/Output.txt
+under ~/NAT/Output.txt. TO run, click on the green arrow button on the top panel.
 
-If you need me to give you a linux compatible version, please let me know.
+If you need me to give you a linux instructions/version, please let me know.
 
-
+--------------------------------------------------------------------------------------
 IMPORTANT NOTE ON TIME:
 I did not include reading about NAT, writing the Readme and adding files to the git repo 
 in my time slot.
 
+--------------------------------------------------------------------------------------
+
 A: ASSUMPTIONS
 
 1. ONLY NAT file's first pairs can have a *. E.g.
-
 Valid Entry: *:8080, 192.168.0.1:80
 Invalid Entry: 10.0.1.1:8080: *:80
 
@@ -31,10 +45,10 @@ a FLOW only has one match in the NAT map.
 3. In the NAT flow, if an entry has an asteric, for example *:21,1.2.3.4:12, then there will be
 no other entry with *:21 as the first IP:PORT to another IP:PORT (e.g. *:21,1.2.4.5:15 will be invalid
 
-3. The NAT and FLOW file are all proper and well-formed, with no duplicates (as in step 2).
+4. The NAT and FLOW file are all proper and well-formed, with no duplicates (as in step 2).
 All IPs are of the form W.X.Y.Z where W, X, Y and Z are integers(e.g. 192)
 This assumption was set for simplicitiy. 
-
+--------------------------------------------------------------------------------------
 B: HOW I TESTED MY CODE
 
 To be honest tested for NAT pair with *:port--> pair , ip:*-->pair and pair-->pair.
@@ -42,6 +56,7 @@ I didn't have enough time to test for edge cases as I would have ran over 90 min
 
 I also tested against the sample provided.
 
+--------------------------------------------------------------------------------------
 C: ANY INTERESTING CODING, DESIGN or ALGORITHMIC CHOICES
 
 ALGORITHMIC CHOICES: The first thing that came to my mind when I saw the * and pairs was 
@@ -71,9 +86,12 @@ If there exists an entry of the pair's port in M3, then write to outpout Pair in
 
 The main benefit of using an unordered_map is that querying can be done in O(1).
 
-SOFTWARE ENGINEERING: Standard class/function definitions. Nothing amazing here.
+SOFTWARE ENGINEERING: Standard class/function definitions. Nothing too innovative here. Just separation of functions.
+
+--------------------------------------------------------------------------------------
 
 D: KNOWN LIMITATIONS DUE TO TIME CONSTRAINT (a.k.a what I would've done better), HOW TO MAKE IT BETTER
+
 I tried to solve my limitations through simplyfing the problem (via assumptions). However, give my assumptions, I ran out
 of time to try the following:
 
